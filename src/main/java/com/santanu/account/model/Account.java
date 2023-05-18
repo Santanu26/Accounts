@@ -9,18 +9,17 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-public class Accounts {
+public class Account {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_number")
     private long accountNumber;
-    @Column(name = "customer_id")
+    @Column(nullable = false)
     private int customerId;
-    @Column(name = "account_type")
+    @Column(nullable = false)
     private String accountType;
-    @Column(name = "branch_address")
+    @Column(nullable = false)
     private String branchAddress;
-    @Column(name = "create_dt")
     private LocalDate createDt;
 }
