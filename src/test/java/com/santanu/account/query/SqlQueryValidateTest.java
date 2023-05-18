@@ -35,6 +35,15 @@ public class SqlQueryValidateTest {
               branch_address VARCHAR(255) NOT NULL,
               create_dt DATE
             )""";
+
+    private static final String UPDATE_ACCOUNT = """
+                INSERT INTO account (account_number, customer_id, account_type, branch_address, create_dt)
+                VALUES (?, ?, ?, ?, ?)
+            """;
+    private static final String UPDATE_CUSTOMER = """
+                INSERT INTO customer (name, email, mobile_number, create_dt) 
+                VALUES (?, ?, ?, ?)
+            """;
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -68,8 +77,7 @@ public class SqlQueryValidateTest {
         String mobileNumber = "1234567890";
         LocalDate createDt = LocalDate.parse("2023-05-18");
 
-        int customerInsertCount = jdbcTemplate.update("INSERT INTO customer (name, email, mobile_number, create_dt) VALUES (?, ?, ?, ?)",
-                name, email, mobileNumber, createDt);
+        int customerInsertCount = jdbcTemplate.update(UPDATE_CUSTOMER, name, email, mobileNumber, createDt);
         assertEquals(1, customerInsertCount, "Customer data insertion Successfully");
 
         long accountNumber = 999L;
@@ -77,8 +85,8 @@ public class SqlQueryValidateTest {
         String accountType = "Savings";
         String branchAddress = "123 Main Street";
 
-        int accountInsertCount = jdbcTemplate.update("INSERT INTO account (account_number, customer_id, account_type, branch_address, create_dt) VALUES (?, ?, ?, ?, ?)",
-                accountNumber, customerId, accountType, branchAddress, createDt);
+        int accountInsertCount = jdbcTemplate.update(
+                UPDATE_ACCOUNT, accountNumber, customerId, accountType, branchAddress, createDt);
         assertEquals(1, accountInsertCount, "Account data insertion Successfully");
     }
 }
