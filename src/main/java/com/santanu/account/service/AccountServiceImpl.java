@@ -5,6 +5,7 @@ import com.santanu.account.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,6 +17,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Optional<Account> findByCustomerId(int customerId) {
+
         return accountRepository.findByCustomerId(customerId);
+    }
+
+    @Override
+    public Optional<List<Account>> findAll() {
+        return Optional.of(accountRepository.findAll());
     }
 }

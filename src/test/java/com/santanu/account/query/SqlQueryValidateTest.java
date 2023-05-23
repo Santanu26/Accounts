@@ -47,7 +47,6 @@ public class SqlQueryValidateTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-
     @Test
     public void testCreateTables() {
         jdbcTemplate.execute(DROP_TABLE_STR + "customer");
